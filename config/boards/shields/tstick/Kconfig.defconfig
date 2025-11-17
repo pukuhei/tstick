@@ -1,0 +1,9 @@
+if SHIELD_TSTICK
+
+config ZMK_KEYBOARD_NAME
+    default "tstick"
+
+config ZMK_SPLIT
+    default n
+
+endif

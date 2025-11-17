@@ -1,0 +1,126 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <input/processors.dtsi>
+#include <dt-bindings/zmk/input_transform.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <physical_layouts.dtsi>
+
+#define INPUT_EV_KEY 0x01
+#define INPUT_EV_REL 0x02
+#define INPUT_EV_ABS 0x03
+#define INPUT_EV_MSC 0x04
+#define INPUT_EV_VENDOR_START 0xf0
+#define INPUT_EV_VENDOR_STOP 0xff
+#define INPUT_REL_X 0x00
+#define INPUT_REL_Y 0x01
+#define INPUT_REL_WHEEL 0x08
+#define INPUT_REL_HWHEEL 0x06
+#define INPUT_REL_MISC 0x09
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,physical-layout = &tstick_layout;
+    };
+
+    tstick_layout: tstick_layout {
+        compatible = "zmk,physical-layout";
+        display-name = "tstick";
+        transform = <&tstick_transform>;
+        kscan = <&kscan0>;
+
+        keys
+            = <&key_physical_attrs 140 140    0    0 0 0 0>
+            , <&key_physical_attrs 140 140  180    0 0 0 0>
+            , <&key_physical_attrs 140 140  360    0 0 0 0>
+            ;
+    };
+
+    tstick_transform: matrix_transform {
+        compatible = "zmk,matrix-transform";
+        columns = <1>;
+        rows = <3>;
+        map = <
+            RC(0,0)
+            RC(1,0)
+            RC(2,0)
+        >;
+    };
+
+    kscan0: kscan0 {
+        compatible = "zmk,kscan-gpio-matrix";
+        diode-direction = "col2row";
+        wakeup-source;
+
+        row-gpios
+            = <&xiao_d 1 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 2 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            , <&xiao_d 3 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>
+            ;
+
+        col-gpios = <&xiao_d 10 GPIO_ACTIVE_HIGH>;
+    };
+
+    rotary_encoder: encoder0 {
+        compatible = "alps,ec11";
+        a-gpios = <&xiao_d 9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        b-gpios = <&xiao_d 8 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        steps = <24>;
+        status = "okay";
+    };
+
+    sensors: sensors {
+        compatible = "zmk,keymap-sensors";
+        sensors = <&rotary_encoder>;
+        triggers-per-rotation = <24>;
+    };
+
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        status = "okay";
+        device = <&trackball>;
+    };
+};
+
+&spi1 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    cs-gpios = <&xiao_d 7 GPIO_ACTIVE_LOW>;
+    pinctrl-0 = <&spi1_default>;
+    pinctrl-1 = <&spi1_sleep>;
+    pinctrl-names = "default", "sleep";
+
+    trackball: trackball@0 {
+        status = "okay";
+        compatible = "pixart,pmw3610";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        cpi = <400>;
+        evt-type = <INPUT_EV_REL>;
+        x-input-code = <INPUT_REL_X>;
+        y-input-code = <INPUT_REL_Y>;
+    };
+};
+
+&pinctrl {
+    spi1_default: spi1_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
+        };
+    };
+
+    spi1_sleep: spi1_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 5)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 4)>,
+                    <NRF_PSEL(SPIM_MISO, 0, 4)>;
+            low-power-enable;
+        };
+    };
+};
+
+&xiao_serial {
+    status = "disabled";
+};

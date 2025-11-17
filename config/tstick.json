@@ -1,0 +1,12 @@
+{
+  "layouts": {
+    "default_layout": {
+      "name": "tstick",
+      "layout": [
+        { "row": 0, "col": 0, "x": 0.0, "y": 0.0 },
+        { "row": 1, "col": 0, "x": 1.5, "y": 0.0 },
+        { "row": 2, "col": 0, "x": 3.0, "y": 0.0 }
+      ]
+    }
+  }
+}

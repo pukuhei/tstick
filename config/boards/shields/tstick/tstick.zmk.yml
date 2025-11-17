@@ -1,0 +1,10 @@
+file_format: "1"
+id: tstick
+name: tstick
+type: shield
+url: https://github.com/pukuhei/tstick
+requires: [seeeduino_xiao_ble]
+features:
+  - keys
+  - pointing
+  - encoder
