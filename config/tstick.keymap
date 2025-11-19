@@ -29,19 +29,19 @@
         default_layer {
             bindings = <
                 &mo 1
-                &mkp MB1
                 &mkp MB2
+                &mkp MB1
 
             >;
 
             sensor-bindings = <&scroll_up_down>;
         };
 
-        scroll_layer {
+        layer1 {
             bindings = <
                 &trans
-                &mkp MB1
-                &mkp MB2
+                &kp RC(RIGHT_ARROW)
+                &kp RC(LEFT_ARROW)
             >;
         };
     };
