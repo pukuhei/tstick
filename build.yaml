@@ -19,6 +19,7 @@
 ---
 include:
   - board: seeeduino_xiao_ble
-    shield: tstick
+    shield: "tstick rgbled_adapter"
+    snippet: studio-rpc-usb-uart
   - board: seeeduino_xiao_ble
     shield: settings_reset

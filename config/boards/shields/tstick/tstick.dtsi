@@ -22,6 +22,40 @@
         zmk,physical-layout = &tstick_layout;
     };
 
+    input_processors {
+        zip_xy_0: zip_xy_0 {
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
+            type = <INPUT_EV_REL>;
+            x-codes = <INPUT_REL_X>;
+            y-codes = <INPUT_REL_Y>;
+        };
+
+        zip_xy_90: zip_xy_90 {
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
+            type = <INPUT_EV_REL>;
+            x-codes = <INPUT_REL_Y>;
+            y-codes = <INPUT_REL_X>;
+        };
+
+        zip_xy_180: zip_xy_180 {
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
+            type = <INPUT_EV_REL>;
+            x-codes = <INPUT_REL_X>;
+            y-codes = <INPUT_REL_Y>;
+        };
+
+        zip_xy_270: zip_xy_270 {
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
+            type = <INPUT_EV_REL>;
+            x-codes = <INPUT_REL_Y>;
+            y-codes = <INPUT_REL_X>;
+        };
+    };
+
     tstick_layout: tstick_layout {
         compatible = "zmk,physical-layout";
         display-name = "tstick";
@@ -78,6 +112,27 @@
         compatible = "zmk,input-listener";
         status = "okay";
         device = <&trackball>;
+        input-processors = <&zip_xy_0 0>;
+
+        layer_3_override {
+            layers = <3>;
+            input-processors = <&zip_xy_270 (INPUT_TRANSFORM_X_INVERT)>;
+        };
+
+        layer_2_override {
+            layers = <2>;
+            input-processors = <&zip_xy_180 (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+        };
+
+        layer_1_override {
+            layers = <1>;
+            input-processors = <&zip_xy_90 (INPUT_TRANSFORM_Y_INVERT)>;
+        };
+
+        layer_0_override {
+            layers = <0>;
+            input-processors = <&zip_xy_0 0>;
+        };
     };
 };
 
