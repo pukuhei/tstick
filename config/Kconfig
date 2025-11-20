@@ -1,0 +1,20 @@
+menu "tstick extras"
+
+menuconfig SENSOR_ROTATION
+    bool "Enable sensor rotation module"
+    default y
+
+if SENSOR_ROTATION
+
+config SENSOR_ROTATION_ANGLE
+    int "Sensor rotation angle (degrees)"
+    default 0
+    range 0 360
+
+config ZMK_BEHAVIOR_SENSOR_ROTATION_STEP
+    bool "Enable sensor rotation step behavior"
+    default y
+
+endif # SENSOR_ROTATION
+
+endmenu

@@ -1,0 +1,24 @@
+# Copyright (c) 2025
+# SPDX-License-Identifier: MIT
+
+description: Sensor rotation step behavior
+
+compatible: "zmk,behavior-angle-step"
+
+include: zero_param.yaml
+
+properties:
+  sensor-rotation:
+    type: phandle
+    required: true
+  step-deg:
+    type: int
+    required: true
+  min-angle:
+    type: int
+    default: 0
+  max-angle:
+    type: int
+    default: 315
+  wrap-around:
+    type: boolean
