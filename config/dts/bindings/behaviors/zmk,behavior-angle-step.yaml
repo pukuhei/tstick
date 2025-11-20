@@ -8,6 +8,10 @@ compatible: "zmk,behavior-angle-step"
 include: zero_param.yaml
 
 properties:
+  "#binding-cells":
+    type: int
+    required: true
+    const: 0
   sensor-rotation:
     type: phandle
     required: true

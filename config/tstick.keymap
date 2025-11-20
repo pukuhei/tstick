@@ -24,7 +24,7 @@
       angle_step_cw: behavior_angle_step_cw {
           compatible = "zmk,behavior-angle-step";
           label = "ANGLE_STEP_CW";
-          #binding-cells = <0>;
+          #sensor-binding-cells = <0>;
           sensor-rotation = <&sensor_rotation_controller>;
           step-deg = <45>;
           min-angle = <0>;
@@ -35,7 +35,7 @@
       angle_step_ccw: behavior_angle_step_ccw {
           compatible = "zmk,behavior-angle-step";
           label = "ANGLE_STEP_CCW";
-          #binding-cells = <0>;
+          #sensor-binding-cells = <0>;
           sensor-rotation = <&sensor_rotation_controller>;
           step-deg = <(-45)>;
           min-angle = <0>;
