@@ -1,5 +1,0 @@
-name: tstick-ext
-build:
-  settings:
-    dts_root: ..
-    board_root: ..
