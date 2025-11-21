@@ -20,36 +20,50 @@
           bindings = <&kp LA(LG(RIGHT_ARROW))>, <&kp LA(LG(LEFT_ARROW))>;
           tap-ms = <20>;
       };
+    };
 
-      angle_step_cw: behavior_angle_step_cw {
-          compatible = "zmk,behavior-angle-step";
-          label = "ANGLE_STEP_CW";
-          #sensor-binding-cells = <0>;
-          sensor-rotation = <&sensor_rotation_controller>;
-          step-deg = <45>;
-          min-angle = <0>;
-          max-angle = <315>;
-          wrap-around;
-      };
+    input_processors {
+        sensor_rotation_45: sensor_rotation_45 {
+            compatible = "zmk,input-processor-sensor-rotation";
+            #input-processor-cells = <0>;
+            rotation-angle = <45>;
+        };
 
-      angle_step_ccw: behavior_angle_step_ccw {
-          compatible = "zmk,behavior-angle-step";
-          label = "ANGLE_STEP_CCW";
-          #sensor-binding-cells = <0>;
-          sensor-rotation = <&sensor_rotation_controller>;
-          step-deg = <(-45)>;
-          min-angle = <0>;
-          max-angle = <315>;
-          wrap-around;
-      };
+        sensor_rotation_90: sensor_rotation_90 {
+            compatible = "zmk,input-processor-sensor-rotation";
+            #input-processor-cells = <0>;
+            rotation-angle = <90>;
+        };
 
-      angle_adjust: behavior_sensor_rotate_angle_adjust {
-          compatible = "zmk,behavior-sensor-rotate";
-          label = "ENCODER_ANGLE_ADJUST";
-          #sensor-binding-cells = <0>;
-          bindings = <&angle_step_cw>, <&angle_step_ccw>;
-          tap-ms = <20>;
-      };
+        sensor_rotation_135: sensor_rotation_135 {
+            compatible = "zmk,input-processor-sensor-rotation";
+            #input-processor-cells = <0>;
+            rotation-angle = <135>;
+        };
+
+        sensor_rotation_180: sensor_rotation_180 {
+            compatible = "zmk,input-processor-sensor-rotation";
+            #input-processor-cells = <0>;
+            rotation-angle = <180>;
+        };
+
+        sensor_rotation_225: sensor_rotation_225 {
+            compatible = "zmk,input-processor-sensor-rotation";
+            #input-processor-cells = <0>;
+            rotation-angle = <225>;
+        };
+
+        sensor_rotation_270: sensor_rotation_270 {
+            compatible = "zmk,input-processor-sensor-rotation";
+            #input-processor-cells = <0>;
+            rotation-angle = <270>;
+        };
+
+        sensor_rotation_315: sensor_rotation_315 {
+            compatible = "zmk,input-processor-sensor-rotation";
+            #input-processor-cells = <0>;
+            rotation-angle = <315>;
+        };
     };
 
     keymap {
@@ -57,7 +71,7 @@
 
         default_layer {
             bindings = <
-                &mo 1
+                &mo 8
                 &mkp MB2
                 &mkp MB1
 
@@ -68,47 +82,177 @@
 
         layer1 {
             bindings = <
-                &trans
-                &kp RC(RIGHT_ARROW)
-                &kp RC(LEFT_ARROW)
+                &mo 8
+                &mkp MB2
+                &mkp MB1
             >;
+
+            sensor-bindings = <&scroll_up_down>;
         };
 
         layer2 {
             bindings = <
-                &trans
-                &kp RC(RIGHT_ARROW)
-                &kp RC(LEFT_ARROW)
+                &mo 8
+                &mkp MB2
+                &mkp MB1
             >;
+
+            sensor-bindings = <&scroll_up_down>;
         };
 
         layer3 {
             bindings = <
-                &trans
-                &kp RC(RIGHT_ARROW)
-                &kp RC(LEFT_ARROW)
+                &mo 8
+                &mkp MB2
+                &mkp MB1
             >;
+
+            sensor-bindings = <&scroll_up_down>;
         };
 
         layer4 {
             bindings = <
-                &trans
-                &trans
-                &trans
+                &mo 8
+                &mkp MB2
+                &mkp MB1
             >;
 
-            sensor-bindings = <&angle_adjust>;
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer5 {
+            bindings = <
+                &mo 8
+                &mkp MB2
+                &mkp MB1
+            >;
+
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer6 {
+            bindings = <
+                &mo 8
+                &mkp MB2
+                &mkp MB1
+            >;
+
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer7 {
+            bindings = <
+                &mo 8
+                &mkp MB2
+                &mkp MB1
+            >;
+
+            sensor-bindings = <&scroll_up_down>;
+        };
+
+        layer8 {
+            bindings = <
+                &trans
+                &kp RC(RIGHT_ARROW)
+                &kp RC(LEFT_ARROW)
+            >;
         };
     };
 
     combos {
         compatible = "zmk,combos";
 
-        combo_angle_adjust {
+        combo_rotate_0 {
             timeout-ms = <30>;
-            key-positions = <1 2>;
-            layers = <0 1 2 3>;
-            bindings = <&mo 4>;
+            key-positions = <0 1 2>;
+            layers = <0>;
+            bindings = <&to 1>;
         };
+
+        combo_rotate_1 {
+            timeout-ms = <30>;
+            key-positions = <0 1 2>;
+            layers = <1>;
+            bindings = <&to 2>;
+        };
+
+        combo_rotate_2 {
+            timeout-ms = <30>;
+            key-positions = <0 1 2>;
+            layers = <2>;
+            bindings = <&to 3>;
+        };
+
+        combo_rotate_3 {
+            timeout-ms = <30>;
+            key-positions = <0 1 2>;
+            layers = <3>;
+            bindings = <&to 4>;
+        };
+
+        combo_rotate_4 {
+            timeout-ms = <30>;
+            key-positions = <0 1 2>;
+            layers = <4>;
+            bindings = <&to 5>;
+        };
+
+        combo_rotate_5 {
+            timeout-ms = <30>;
+            key-positions = <0 1 2>;
+            layers = <5>;
+            bindings = <&to 6>;
+        };
+
+        combo_rotate_6 {
+            timeout-ms = <30>;
+            key-positions = <0 1 2>;
+            layers = <6>;
+            bindings = <&to 7>;
+        };
+
+        combo_rotate_7 {
+            timeout-ms = <30>;
+            key-positions = <0 1 2>;
+            layers = <7>;
+            bindings = <&to 0>;
+        };
+    };
+};
+
+&trackball_listener {
+    rot_layer_45 {
+        layers = <1>;
+        input-processors = <&sensor_rotation_45>;
+    };
+
+    rot_layer_90 {
+        layers = <2>;
+        input-processors = <&sensor_rotation_90>;
+    };
+
+    rot_layer_135 {
+        layers = <3>;
+        input-processors = <&sensor_rotation_135>;
+    };
+
+    rot_layer_180 {
+        layers = <4>;
+        input-processors = <&sensor_rotation_180>;
+    };
+
+    rot_layer_225 {
+        layers = <5>;
+        input-processors = <&sensor_rotation_225>;
+    };
+
+    rot_layer_270 {
+        layers = <6>;
+        input-processors = <&sensor_rotation_270>;
+    };
+
+    rot_layer_315 {
+        layers = <7>;
+        input-processors = <&sensor_rotation_315>;
     };
 };

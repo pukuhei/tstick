@@ -6,6 +6,8 @@ manifest:
       url-base: https://github.com/badjeff
     - name: caksoylar
       url-base: https://github.com/caksoylar
+    - name: hsgw
+      url-base: https://github.com/hsgw
   projects:
     - name: zmk
       remote: zmkfirmware
@@ -16,6 +18,9 @@ manifest:
       revision: main
     - name: zmk-rgbled-widget
       remote: caksoylar
+      revision: main
+    - name: zmk-feature-sensor_rotation
+      remote: hsgw
       revision: main
   self:
     path: config
