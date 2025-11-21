@@ -1,5 +1,5 @@
 name: tstick-ext
 build:
-  cmake: .
   settings:
-    dts_root: .
+    dts_root: ..
+    board_root: ..
